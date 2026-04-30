@@ -1,3 +1,5 @@
+import Image from "next/image";
+import Link from "next/link";
 import { projects } from "@/lib/data";
 
 export default function Projects() {
@@ -6,27 +8,29 @@ export default function Projects() {
       <div className="flex items-baseline justify-between mb-12">
         <h2 className="font-display text-3xl text-stone-900">Projets</h2>
         <a
-          href="https://github.com/eric"
+          href="https://github.com/lagentrix"
           target="_blank"
           rel="noopener noreferrer"
           className="text-xs font-mono text-stone-400 hover:text-stone-700 transition-colors"
         >
-          github.com/eric →
+          github.com/lagentrix
         </a>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {projects.map((project) => (
-          <article
+          <Link
             key={project.id}
-            className="card-hover group bg-white rounded-lg border border-stone-200 overflow-hidden"
+            href={`/projets/${project.slug}`}
+            className="card-hover group bg-white rounded-lg border border-stone-200 overflow-hidden block"
           >
-            {/* Placeholder thumbnail */}
-            <div img src="img/unsplash1.avif"
-              className="h-40 flex items-center justify-center border-b border-stone-100"
-              style={{ backgroundColor: project.accent }}
-            >
-              <div className="w-10 h-10 rounded-full bg-white/60 border border-stone-300" />
+            <div className="relative h-40 w-full overflow-hidden">
+              <Image
+                src={project.image}
+                alt={project.title}
+                fill
+                className="object-cover group-hover:scale-105 transition-transform duration-300"
+              />
             </div>
 
             <div className="p-5">
@@ -39,32 +43,15 @@ export default function Projects() {
 
               <div className="flex flex-wrap gap-1.5 mb-5">
                 {project.tags.map((tag) => (
-                  <span key={tag} className="tag">
-                    {tag}
-                  </span>
+                  <span key={tag} className="tag">{tag}</span>
                 ))}
               </div>
 
-              <div className="flex gap-3">
-                <a
-                  href={project.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-xs text-stone-500 hover:text-stone-900 transition-colors font-mono"
-                >
-                  Code →
-                </a>
-                <a
-                  href={project.demo}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-xs text-stone-500 hover:text-stone-900 transition-colors font-mono"
-                >
-                  Demo →
-                </a>
-              </div>
+              <span className="text-xs font-mono text-stone-400 group-hover:text-stone-700 transition-colors">
+                Voir le projet &rarr;
+              </span>
             </div>
-          </article>
+          </Link>
         ))}
       </div>
     </section>
