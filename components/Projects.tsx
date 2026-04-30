@@ -22,7 +22,7 @@ export default function Projects() {
             className="card-hover group bg-white rounded-lg border border-stone-200 overflow-hidden"
           >
             {/* Placeholder thumbnail */}
-            <div
+            <div img src="img/unsplash1.avif"
               className="h-40 flex items-center justify-center border-b border-stone-100"
               style={{ backgroundColor: project.accent }}
             >
